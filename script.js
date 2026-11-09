@@ -13,17 +13,20 @@ shortenForm.addEventListener("submit", async function (e) {
     // Check whether the input is empty/falsy
     if (!longUrl) {
         console.log("Please enter a URL");
-        return;
         // Guard Clause exits function if value is falsy
+        return;
+        
     }
 
     console.log(longUrl);
 
 
-// validating URL and creating parsedURL object
-try {
-    const parsedUrl = new URL(longUrl);
+// validating URL and creating parsedURL variable & object
 
+let parsedUrl;
+
+try {
+    parsedUrl = new URL(longUrl);
     // Checking url protocol is valid 
     if (!["http:", "https:"].includes(parsedUrl.protocol)) {
         throw new Error("Invalid URL protocol");
@@ -36,22 +39,33 @@ try {
     return;
 }
     
-// Await to execute function until after promise is fulfilled "/api/shorten"
-const response = await fetch("/api/shorten", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    // Turn JSON obj into a string
-    body: longUrl
-});
+// Pause execution--wait for API req to complete (until after promise is settled succeeds/fails)
+// Handle API request and potential errors
+try {
+    // Wait for the server's response
+    const response = await fetch("/api/shorten", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ long_url: parsedUrl.href })
+    });
 
-const data = await response.json();
+    // Convert the JSON response into a JavaScript object
+    const data = await response.json();
 
-if (!response.ok) {
-    console.log("Something went wrong");
-    return;
+    // Check whether the server returned an HTTP error
+    if (!response.ok) {
+        console.log("Something went wrong");
+        return;
+    }
+
+    // Display the shortened URL in the console
+    console.log(data.shortenedUrl);
+
+} catch (error) {
+    // Handle network failures or JSON parsing errors
+    console.log("Could not complete the request:", error);
 }
 
-console.log(data.shortenedUrl);
-})
+}); // Closes the submit event listener
