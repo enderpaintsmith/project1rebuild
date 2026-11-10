@@ -3,16 +3,18 @@ const shortenForm = document.getElementById("shorten-form");
 console.log(shortenForm);
 // Find the input field where the user enters a URL
 const urlInput = document.getElementById("url-input");
+const errorMessage = document.getElementById("error-message");
 
 // Handle submit form and prevent default html form submit
 shortenForm.addEventListener("submit", async function (e) {
     e.preventDefault();
+    errorMessage.textContent = "";
     // Trim whitespace before/after input if entered
     const longUrl = urlInput.value.trim();
 
     // Check whether the input is empty/falsy
     if (!longUrl) {
-        console.log("Please enter a URL");
+        errorMessage.textContent = "Please enter a URL";
         // Guard Clause exits function if value is falsy
         return;
 
@@ -35,7 +37,7 @@ shortenForm.addEventListener("submit", async function (e) {
         console.log(parsedUrl.href);
 
     } catch (error) {
-        console.log("Please enter a valid URL");
+        errorMessage.textContent = "Please enter a valid URL";
         return;
     }
 
@@ -56,7 +58,7 @@ shortenForm.addEventListener("submit", async function (e) {
 
         // Check whether the server returned an HTTP error
         if (!response.ok) {
-            console.log("Server error:", response.status, data.error);
+            errorMessage.textContent = data.error || "Unable to shorten URL";
             return;
 
         }
@@ -105,6 +107,9 @@ shortenForm.addEventListener("submit", async function (e) {
     } catch (error) {
         // Handle network failures or JSON parsing errors
         console.log("Could not complete the request:", error);
+
+        // Display error message on webpage
+        errorMessage.textContent = "Something went wrong. Please try again.";
     }
 
-}); // Closes the submit event listener
+});
