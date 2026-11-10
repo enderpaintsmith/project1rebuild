@@ -11,33 +11,19 @@ Thanks for checking out this front-end coding challenge.
 **To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
 
 ## The challenge
+# url shortening landing page
 
-Your challenge is to build out this landing page, integrate with the [Clean URI API](https://cleanuri.com/docs) and get it looking as close to the design as possible.
+this is a landing page for a url shortener. the goal is to build it to match the design as close as i can and hook it up to the [Clean URI API](https://cleanuri.com/docs). i can use whatever tools i want, so i'm using it to practice stuff.
 
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
+## what users should be able to do
 
-Your users should be able to:
+- see a layout that fits  screen size (mobile and desktop)
+- shorten valid urls
+- see  list of shortened links, even with refreshing
+- copy a shortened link with one click
+- get an error message if they submit the form with an empty input
 
-- View the optimal layout for the site depending on their device's screen size
-- Shorten any valid URL
-- See a list of their shortened links, even after refreshing the browser
-- Copy the shortened link to their clipboard in a single click
-- Receive an error message when the `form` is submitted if:
-  - The `input` field is empty
-
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
-
-## Where to find everything
-
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
-
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
-
-If you would like the design files (we provide Sketch & Figma versions) to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
-
-You will find all the required assets in the `/images` folder. The assets are already optimized.
-
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+need help? the [frontend mentor community](https://www.frontendmentor.io/community) has a **#help** channel.
 
 ## Building your project
 
