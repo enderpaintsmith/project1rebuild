@@ -1,28 +1,31 @@
 export default async function handler(request, response) {
 
-    // 1. Only allow POST requests
+    //send a post request and receive a response
+
+    // Only allow POST requests
     if (request.method !== "POST") {
         return response.status(405).json({
             error: "Method not allowed"
         });
     }
 
-    // 2. Extract the original URL
+    // Extract the original URL
     const { long_url } = request.body || {};
 
     console.log(long_url);
 
-    // 3. Check whether a URL was provided
+    // Check whether a URL was provided
     if (!long_url) {
         return response.status(400).json({
             error: "Please provide a URL"
         });
     }
 
-    // 4. Validate the URL
+    // Validate the URL
     let parsedUrl;
 
     try {
+        // Turn string into new Url object
         parsedUrl = new URL(long_url);
 
         // Only allow HTTP and HTTPS
@@ -36,7 +39,7 @@ export default async function handler(request, response) {
         });
     }
 
-    // 5. Retrieve the Bitly API token
+    // Retrieve the Bitly API token
     const token = process.env.BITLY_ACCESS_TOKEN;
 
     if (!token) {
@@ -44,16 +47,21 @@ export default async function handler(request, response) {
             error: "Bitly API token is not configured"
         });
     }
-// 6. Send the original URL to Bitly
+
+}
+
 const bitlyResponse = await fetch("https://api-ssl.bitly.com/v4/shorten", {
-    method: "POST",
+    method: "POST"
     headers: {
+        //indentify header for authentication by communicating bearer to bitly
+        // use ${token} to insert token backticks allow JS to use template literal
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
     },
+    // request body
     body: JSON.stringify({
-        long_url: parsedUrl.href,
+        // Refer to the complete Url with .href 
+        long_url:parsedUrl.href,
         domain: "bit.ly"
     })
 });
-} // End of handler function
