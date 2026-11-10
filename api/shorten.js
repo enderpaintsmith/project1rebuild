@@ -41,7 +41,7 @@ export default async function handler(request, response) {
 
     // Retrieve the Bitly API token from Environment Variable
     const token = process.env.BITLY_ACCESS_TOKEN;
-
+    console.log("Bitly token loaded:", Boolean(token));
     if (!token) {
         return response.status(500).json({
             error: "Bitly API token is not configured"
