@@ -1,72 +1,27 @@
-# Frontend Mentor - Shortly URL shortening API Challenge
+# Server to Server Communication
 
-![Design preview for the Shortly URL shortening API coding challenge](./design/desktop-preview.jpg)
+## Project Overview
 
-## Welcome! 👋
+For this lab, I created a Node.js server using Express that communicates with an external API to retrieve random fun facts. The application uses Axios to send a GET request to the Useless Facts API and returns the information in a simplified JSON format.
 
-Thanks for checking out this front-end coding challenge.
+## How It Works
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+I initialized the project using npm and installed Express and Axios as dependencies. In `server.js`, I created an Express server running on port 3000 with a GET route at `/api/fun-fact`.
 
-**To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
+When a client visits this endpoint, the server uses `async/await` with Axios to request a random fact from the external API. Instead of returning the entire response, I extracted only the `text` property and sent it back as a JSON object containing a `fact` property.
 
-## The challenge
-# url shortening landing page
+I also used a `try...catch` block for error handling. If the external API request fails, the server returns a 500 status code with a generic error message rather than exposing the full error object.
 
-this is a landing page for a url shortener. the goal is to build it to match the design as close as i can and hook it up to the [Clean URI API](https://cleanuri.com/docs). i can use whatever tools i want, so i'm using it to practice stuff.
+## Running the Application
 
-## what users should be able to do
+Install the dependencies using `npm install`, then start the server with `node server.js`.
 
-- see a layout that fits  screen size (mobile and desktop)
-- shorten valid urls
-- see  list of shortened links, even with refreshing
-- copy a shortened link with one click
-- get an error message if they submit the form with an empty input
+Visit `http://localhost:3000/api/fun-fact` in a browser to retrieve a random fact. Refreshing the page makes another request to the API.
 
-need help? the [frontend mentor community](https://www.frontendmentor.io/community) has a **#help** channel.
+## Reflection
 
-## Building your project
+This lab helped me understand how servers communicate with external APIs and how to handle the data returned from those requests. By extracting only the information needed, I can provide a cleaner response to the client without including unnecessary data.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps
+Using a generic error message also helps prevent internal application details from being exposed. If I wanted to support different languages, I could modify the API request URL to include a language parameter, such as `?language=de`, assuming the external API supports it.
 
-## Deploying your project
-
-- [Vercel](https://vercel.com/)
-
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
-
-## Create a custom `README.md`
-
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
-
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
-
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
-
-## Submitting your solution
-
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
-
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
-
-## Sharing your solution
-
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
-# project1rebuild
+Overall, this activity gave me more experience working with **Express routes, Axios, asynchronous functions, JSON responses, and error handling**.
