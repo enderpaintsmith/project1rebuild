@@ -55,9 +55,10 @@ try {
     const data = await response.json();
 
     // Check whether the server returned an HTTP error
-    if (!response.ok) {
-        console.log("Something went wrong");
-        return;
+   if (!response.ok) {
+    console.log("Server error:", response.status, data.error);
+    return;
+
     }
 
     // Display the shortened URL in the console
