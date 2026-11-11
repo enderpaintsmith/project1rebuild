@@ -8,7 +8,7 @@ For this lab, I created a Node.js server using Express that communicates with an
 
 I initialized the project using npm and installed Express as dependency did not use Axios. In `server.js`, I created an Express server running on port 3000 with a GET route at `/api/fun-fact`.
 
-When a client visits this endpoint, the server uses `async/await` with Axios to request a random fact from the external API. Instead of returning the entire response, I extracted only the `text` property and sent it back as a JSON object containing a `fact` property.
+When a client visits this endpoint, the server uses `async/await` and requests a random fact. Instead of returning the entire response, I extracted only theg `text` property and sent it back as a JSON object containing a `fact` property.
 
 I also used a `try...catch` block for error handling. If the external API request fails, the server returns a 500 status code with a generic error message rather than exposing the full error object.
 
